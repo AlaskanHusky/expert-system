@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class DataUtil {
+class FileReaderUtil {
 
     List<String> getWordsFromFile(String filename) {
         List<String> words = new ArrayList<>();
         String s;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(filename));
+            BufferedReader br = new BufferedReader(new java.io.FileReader(filename));
             while ((s = br.readLine()) != null) {
                 words.add(s);
             }
@@ -23,7 +23,7 @@ class DataUtil {
         return words;
     }
 
-    int[][] getMatrixFromFile(String filename, int numberOfObj, int numberOfChars) {
+    int[][] getMatrixFromFile(String filename, int numberOfChars, int numberOfObj) {
         int[][] matrix = new int[numberOfChars][numberOfObj];
         String els;
         int i = 0;
@@ -39,24 +39,6 @@ class DataUtil {
             ex.printStackTrace();
         }
         return matrix;
-    }
-
-    void printTable(int[][] matrix, List<String> objs, List<String> chars) {
-        System.out.print("      ");
-
-        for (String obj : objs) {
-            System.out.print(obj + " ");
-        }
-
-        System.out.println();
-
-        for (int row = 0; row < matrix.length; row++) {
-            System.out.print(chars.get(row) + " ");
-            for (int column = 0; column < matrix[row].length; column++) {
-                System.out.print(matrix[row][column] + " ");
-            }
-            System.out.println();
-        }
     }
 
     void printMatrix(int[][] matrix) {
