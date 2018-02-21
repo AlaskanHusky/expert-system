@@ -10,8 +10,6 @@ public class Main {
         ExpertSystem expertSystem = new ExpertSystem();
 
         expertSystem.fillSystemWithData(OBJECTS_FILE_NAME, CHARACTERISTICS_FILE_NAME, MATRIX_FILE_NAME);
-        expertSystem.printTable();
-        expertSystem.deleteEmptyRows();
         expertSystem.askQuestion();
     }
 }

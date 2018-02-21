@@ -31,19 +31,35 @@ class ExpertSystem {
         }
     }
 
-    void deleteEmptyRows() {
-        int i;
-        while (true) {
-            i = findEmptyRow();
-            if (i == -1) {
-                break;
-            } else {
-                deleteRow(i);
-            }
+    void askQuestion() {
+        if(system[0].length == 1) {
+            System.out.println("Your object is " + system[0][0].getObject());
+            return;
+        }
+
+        deleteEmptyRows();
+
+        printTable();
+
+        Scanner in = new Scanner(System.in);
+        int rowIndex = findMinRow();
+        String aChar = system[rowIndex][0].getCharacteristic();
+
+        System.out.println("Does it have " + aChar + "?");
+        System.out.print("Yes(1)/No(0): ");
+
+        int answer = in.nextInt();
+
+        if (answer != 0) {
+            deleteUnsuitableObjects(rowIndex);
+            askQuestion();
+        } else {
+            deleteUnsuitableObjectsAndChar(rowIndex);
+            askQuestion();
         }
     }
 
-    void printTable() {
+    private void printTable() {
         System.out.println("_____________________________");
         System.out.print("      ");
 
@@ -63,20 +79,44 @@ class ExpertSystem {
         System.out.println("_____________________________");
     }
 
-    void askQuestion() {
-        Scanner in = new Scanner(System.in);
-        int rowIndex = findMinRow();
-        String aChar = system[rowIndex][0].getCharacteristic();
+    private void deleteUnsuitableObjects(int charIndex) {
+        int columnsNumber = system[charIndex].length;
+        int iterator = 0;
+        int j = 0;
+        while(iterator != columnsNumber) {
+            if (system[charIndex][j].getValue() == 0) {
+                deleteColumn(j);
+            } else {
+                j++;
+            }
+            iterator++;
+        }
+    }
 
-        System.out.println("Does it have " + aChar + "?");
-        System.out.print("Yes(1)/No(0): ");
+    private void deleteUnsuitableObjectsAndChar(int charIndex) {
+        int columnsNumber = system[charIndex].length;
+        int iterator = 0;
+        int j = 0;
+        while(iterator != columnsNumber) {
+            if (system[charIndex][j].getValue() == 1) {
+                deleteColumn(j);
+            } else {
+                j++;
+            }
+            iterator++;
+        }
+        deleteRow(charIndex);
+    }
 
-        int answer = in.nextInt();
-
-        if (answer != 0) {
-
-        } else {
-
+    private void deleteEmptyRows() {
+        int i;
+        while (true) {
+            i = findEmptyRow();
+            if (i == -1) {
+                break;
+            } else {
+                deleteRow(i);
+            }
         }
     }
 
