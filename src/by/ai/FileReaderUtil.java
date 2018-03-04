@@ -6,8 +6,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс для работы с текстовыми файлами.
+ */
 class FileReaderUtil {
 
+    /**
+     * Считывает из файла массив строк.
+     *
+     * @param   filename  имя файла
+     * @return            список строк
+     */
     List<String> getWordsFromFile(String filename) {
         List<String> words = new ArrayList<>();
         String s;
@@ -23,6 +32,14 @@ class FileReaderUtil {
         return words;
     }
 
+    /**
+     * Считывает значения матрицы из файла
+     *
+     * @param   filename       имя файла
+     * @param   numberOfChars  количество характеристик
+     * @param   numberOfObj    количество объектов
+     * @return                 целочисленную матрицу
+     */
     int[][] getMatrixFromFile(String filename, int numberOfChars, int numberOfObj) {
         int[][] matrix = new int[numberOfChars][numberOfObj];
         String els;
@@ -41,6 +58,11 @@ class FileReaderUtil {
         return matrix;
     }
 
+    /**
+     * Выводит в консоль матрицу.
+     *
+     * @param  matrix  двумерный целочисленный массив
+     */
     void printMatrix(int[][] matrix) {
         for (int[] row : matrix) {
             for (int el : row) {
@@ -50,6 +72,12 @@ class FileReaderUtil {
         }
     }
 
+    /**
+     * Преобразует массив строк в целочисленный массив.
+     *
+     * @param   arr  одномерный массив строк
+     * @return       одномерный целочисленый массив
+     */
     private int[] convertFromStringToInt(String[] arr) {
         int[] result = new int[arr.length];
 
